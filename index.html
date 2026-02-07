@@ -2,55 +2,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pase VIP - Tradición Carnavalera</title>  <!-- Fuente estilo carnaval (inspirada, no idéntica) -->  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <title>Pase VIP - Tradición Carnavalera</title>  <!-- Fuentes estilo afiche carnavalero -->  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Baloo+2:wght@700&display=swap" rel="stylesheet">  <style>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">  <style>
     body {
       margin: 0;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(circle at top, #ff2f92, #b3004f);
-      font-family: 'Baloo 2', sans-serif;
+      background: #d4005c;
+      font-family: 'Montserrat', sans-serif;
       overflow: hidden;
     }
 
-    /* Figuras decorativas */
-    .shape {
+    /* Fondo tipo afiche */
+    .bg-pattern {
       position: absolute;
-      border-radius: 50%;
-      opacity: 0.25;
-      animation: float 6s ease-in-out infinite alternate;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, #ffde59 0 8%, transparent 9%),
+        radial-gradient(circle at 80% 30%, #00e5ff 0 7%, transparent 8%),
+        radial-gradient(circle at 50% 80%, #6cff00 0 6%, transparent 7%);
+      opacity: 0.35;
+      pointer-events: none;
     }
 
-    .s1 { width: 140px; height: 140px; background: yellow; top: 8%; left: 10%; }
-    .s2 { width: 90px; height: 90px; background: cyan; bottom: 15%; right: 12%; }
-    .s3 { width: 60px; height: 60px; background: lime; top: 20%; right: 25%; }
-
-    @keyframes float {
-      from { transform: translateY(0); }
-      to { transform: translateY(-20px); }
-    }
-
-    .card {
+    .poster {
       position: relative;
       z-index: 2;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 45px 60px;
-      border-radius: 26px;
+      background: linear-gradient(180deg, #ff006e, #b0004b);
+      padding: 45px 55px 55px;
+      border-radius: 28px;
+      border: 6px solid #ffcc33;
+      box-shadow: 0 0 45px rgba(0,0,0,0.4);
+      max-width: 420px;
+      width: 90%;
       text-align: center;
-      backdrop-filter: blur(6px);
-      border: 4px solid #ffd84d;
-      box-shadow: 0 0 35px rgba(255, 216, 77, 0.7);
     }
 
     .vip {
       font-family: 'Luckiest Guy', cursive;
-      font-size: 3.2rem;
+      font-size: 3.4rem;
       color: white;
       letter-spacing: 3px;
-      text-shadow: 3px 3px 0 #ffb000;
+      text-shadow: 4px 4px 0 #ffb000;
     }
 
     .title {
@@ -58,40 +54,91 @@
       font-family: 'Luckiest Guy', cursive;
       font-size: 2.6rem;
       color: #ffe066;
-      text-shadow: 3px 3px 0 #ff7a00;
+      text-shadow: 4px 4px 0 #ff7a00;
     }
 
     .restricted {
-      margin-top: 18px;
-      font-size: 1.6rem;
-      font-weight: bold;
-      color: #ffffff;
-      background: red;
+      margin: 20px auto 10px;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: white;
+      background: #e60000;
       display: inline-block;
-      padding: 8px 18px;
-      border-radius: 14px;
-      box-shadow: 0 0 15px rgba(255,0,0,0.6);
+      padding: 10px 22px;
+      border-radius: 16px;
+      letter-spacing: 2px;
+      box-shadow: 0 0 18px rgba(255,0,0,0.7);
     }
 
     .date {
-      margin-top: 20px;
+      margin-top: 16px;
       font-size: 1.3rem;
       color: white;
-      opacity: 0.9;
+    }
+
+    /* Código de barras */
+    .scanner-wrap {
+      margin-top: 30px;
+      background: #fff;
+      padding: 18px 16px 26px;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .barcode {
+      height: 90px;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          #000 0 3px,
+          transparent 3px 6px,
+          #000 6px 8px,
+          transparent 8px 12px,
+          #000 12px 16px,
+          transparent 16px 20px
+        );
+    }
+
+    .scan-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(0,255,0,0.9);
+      box-shadow: 0 0 15px rgba(0,255,0,0.9);
+      animation: scan 2.5s linear infinite;
+    }
+
+    @keyframes scan {
+      from { top: 0; }
+      to { top: 100%; }
+    }
+
+    .scan-text {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      font-weight: 700;
+      color: #333;
     }
 
     @media (max-width: 600px) {
-      .vip { font-size: 2.4rem; }
-      .title { font-size: 2rem; }
-      .restricted { font-size: 1.2rem; }
+      .vip { font-size: 2.6rem; }
+      .title { font-size: 2.1rem; }
     }
   </style></head>
-<body>  <div class="shape s1"></div>
-  <div class="shape s2"></div>
-  <div class="shape s3"></div>  <div class="card">
+<body>  <div class="bg-pattern"></div>  <div class="poster">
     <div class="vip">PASE V.I.P</div>
-    <div class="title">TRADICIÓN CARNAVALERA</div>
-    <div class="restricted">ACCESO RESTRINGIDO</div>
-    <div class="date">15/02/2026</div>
+    <div class="title">TRADICIÓN CARNAVALERA</div><div class="restricted">ACCESO RESTRINGIDO</div>
+<div class="date">15/02/2026</div>
+
+<div class="scanner-wrap">
+  <div class="barcode"></div>
+  <div class="scan-line"></div>
+  <div class="scan-text">ESCANEANDO ACCESO...</div>
+</div>
+
   </div></body>
 </html>
